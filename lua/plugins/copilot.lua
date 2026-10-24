@@ -5,16 +5,16 @@ return {
         event = "InsertEnter",
         opts = {
             suggestion = {
-                enabled = true,
+                enabled = false,
                 auto_trigger = true,
                 debounce = 75,
                 keymap = {
-                    accept = "<M-l>", -- Alt + l (alles annehmen)
+                    accept = "<M-l>",      -- Alt + l (alles annehmen)
                     accept_word = "<M-w>", -- Alt + w (nur nächstes WORT)
                     accept_line = "<M-f>", -- Alt + f (nur nächste ZEILE)
-                    next = "<M-]>", -- Alt + ] (nächster Vorschlag)
-                    prev = "<M-[>", -- Alt + [ (vorheriger Vorschlag)
-                    dismiss = "<C-]>", -- Strg + ] (Vorschlag ausblenden)
+                    next = "<M-]>",        -- Alt + ] (nächster Vorschlag)
+                    prev = "<M-[>",        -- Alt + [ (vorheriger Vorschlag)
+                    dismiss = "<C-]>",     -- Strg + ] (Vorschlag ausblenden)
                 },
             },
         },

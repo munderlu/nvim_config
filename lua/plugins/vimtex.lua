@@ -21,16 +21,16 @@ return {
         },
       }
 
-      -- 3. Deinen PDF-Viewer einstellen (z.B. "zathura", "skim" oder "okular")
-      -- Wir sagen VimTeX, dass wir einen benutzerdefinierten (general) Viewer nutzen
+      -- 3. PDF-Viewer: GNOME "Dokumentenbetrachter"
+      -- Neuere GNOME-Versionen liefern "Papers" aus, ältere "Evince" – wir nehmen, was da ist.
+      -- Beide laden das PDF nach jedem Kompilieren automatisch neu.
+      -- Hinweis: Forward Search (\lv springt zur Cursor-Zeile im PDF) können beide
+      -- nicht über die Kommandozeile – \lv öffnet hier nur das PDF.
+      -- Wer das braucht: Zathura installieren und vim.g.vimtex_view_method = "zathura" setzen
+      -- (dann die beiden Zeilen darunter entfernen).
       vim.g.vimtex_view_method = "general"
-
-      -- Hier konfigurieren wir, dass dieses allgemeine Programm Okular ist
-      vim.g.vimtex_view_general_viewer = "okular"
-
-      -- Das hier ist die Magie für Forward Search (\lv):
-      -- Wir sagen Okular ganz präzise, auf welche Seite und Zeile es springen soll
-      vim.g.vimtex_view_general_options = "--unique file:@pdf#src:@line@tex"
+      vim.g.vimtex_view_general_viewer = vim.fn.executable("papers") == 1 and "papers" or "evince"
+      vim.g.vimtex_view_general_options = "@pdf"
       vim.g.vimtex_quickfix_open_on_warning = 0 -- Verhindert das automatische Öffnen des Quickfix-Fensters bei Warnungen
       -- Ein Autocommand, das nach erfolgreichem Kompilieren das PDF nach vorne kopiert
       vim.api.nvim_create_autocmd("User", {
