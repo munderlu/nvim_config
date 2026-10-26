@@ -18,5 +18,26 @@ return {
                 },
             },
         },
+        -- Copilot beim Start direkt ausschalten. Einschalten bei Bedarf mit
+        -- <leader>at (Leertaste a t) oder :Copilot enable
+        config = function(_, opts)
+            require("copilot").setup(opts)
+            require("copilot.command").disable()
+        end,
+        keys = {
+            {
+                "<leader>at",
+                function()
+                    if require("copilot.client").is_disabled() then
+                        require("copilot.command").enable()
+                        vim.notify("Copilot an")
+                    else
+                        require("copilot.command").disable()
+                        vim.notify("Copilot aus")
+                    end
+                end,
+                desc = "Copilot an/aus",
+            },
+        },
     },
 }
